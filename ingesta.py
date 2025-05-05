@@ -1,5 +1,5 @@
 import boto3
-import mysql
+import mysql.connector
 import csv
 
 # Variables de conexion
