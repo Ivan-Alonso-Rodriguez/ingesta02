@@ -2,8 +2,8 @@ import boto3
 import mysql.connector
 import csv
 
-# --- Parámetros de conexión ---
-DB_HOST = "tu-host"
+# Variables de conexion
+DB_HOST = "localhost" # o otro host
 DB_PORT = 3306
 DB_USER = "tu-usuario"
 DB_PASSWORD = "tu-clave"
@@ -12,7 +12,7 @@ DB_TABLE = "tu-tabla"
 BUCKET_NAME = "iarp-output-01"
 FILE_NAME = "data.csv"
 
-# --- Conexión a MySQL ---
+# Usando mysql-connector-python
 conn = mysql.connector.connect(
     host=DB_HOST,
     port=DB_PORT,
@@ -23,7 +23,7 @@ conn = mysql.connector.connect(
 cursor = conn.cursor()
 cursor.execute(f"SELECT * FROM {DB_TABLE}")
 
-# --- Escribir archivo CSV ---
+# Escribe el csv para luego pasarlo
 with open(FILE_NAME, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow([i[0] for i in cursor.description])  # nombres de columnas
@@ -33,7 +33,7 @@ with open(FILE_NAME, "w", newline="") as f:
 cursor.close()
 conn.close()
 
-# --- Subir a S3 ---
+# Subimos a S3
 s3 = boto3.client('s3')
 s3.upload_file(FILE_NAME, BUCKET_NAME, FILE_NAME)
 
