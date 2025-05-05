@@ -9,7 +9,7 @@ DB_USER = "tu-usuario"
 DB_PASSWORD = "tu-clave"
 DB_NAME = "tu-bd"
 DB_TABLE = "tu-tabla"
-BUCKET_NAME = "gcr-output-01"
+BUCKET_NAME = "iarp-output-01"
 FILE_NAME = "data.csv"
 
 # --- Conexión a MySQL ---
